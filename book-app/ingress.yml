@@ -4,8 +4,7 @@ metadata:
   name: book-store-ingress
 spec:
   rules:
-  - host: bookstore.example.com
-    http:
+  - http:
       paths:
       - pathType: Prefix
         path: "/"

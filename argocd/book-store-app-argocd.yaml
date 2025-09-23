@@ -11,7 +11,7 @@ spec:
     path: book-app
   destination: 
     server: https://kubernetes.default.svc
-    namespace: production
+    namespace: book-argocd
   syncPolicy:
     automated:
       prune: true

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-image-updater-config
+  namespace: argocd
+data:
+  repositories.conf: |
+    repositories:
+      - url: https://github.com/Haythem532002/book-store-gitops
+        usernameSecret:
+          name: git-creds
+          key: username
+        passwordSecret:
+          name: git-creds
+          key: password

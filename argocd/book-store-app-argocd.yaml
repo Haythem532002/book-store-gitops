@@ -13,6 +13,7 @@ spec:
     repoURL: https://github.com/Haythem532002/book-store-gitops
     targetRevision: main
     path: book-app
+    kustomize: {}
   destination: 
     server: https://kubernetes.default.svc
     namespace: book-argocd

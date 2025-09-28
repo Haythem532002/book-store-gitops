@@ -4,9 +4,9 @@ metadata:
   name: book-store-app
   namespace:  argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: book-store=haythem22/book-store-gitops:latest
+    argocd-image-updater.argoproj.io/image-list: book-store=haythem22/book-store-gitops
     argocd-image-updater.argoproj.io/write-back-method: git
-    argocd-image-updater.argoproj.io/write-back-target: book-app
+    argocd-image-updater.argoproj.io/write-back-target: deployment
 spec:
   project: default
   source:

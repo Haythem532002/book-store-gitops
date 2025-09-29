@@ -1,0 +1,7 @@
+{
+  "metadata": {
+    "annotations": {
+      "argocd-image-updater.argoproj.io/book-store.kustomize.image-name": "haythem22/book-store-gitops"
+    }
+  }
+}

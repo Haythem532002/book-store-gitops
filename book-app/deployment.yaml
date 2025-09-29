@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: book-store
-        image: haythem22/book-store-gitops:0.1.0
+        image: haythem22/book-store-gitops:0.1.1
         ports:
         - containerPort: 8000

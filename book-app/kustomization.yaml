@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yml
-  - configMap.yaml 
+  - configMap.yaml
 
 images:
   - name: haythem22/book-store-gitops
-    newTag: latest
+    newTag: "0.1.0"

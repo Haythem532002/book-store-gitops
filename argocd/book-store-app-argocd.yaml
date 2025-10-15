@@ -4,27 +4,25 @@ metadata:
   name: book-store-app
   namespace: argocd
   annotations:
-    # The container IMAGE to watch (NOT a git repo URL)
+    # Watch THIS container image (must match your Deployment & Kustomize)
     argocd-image-updater.argoproj.io/image-list: book-store=docker.io/haythem22/book-store-gitops
 
-    # Let the updater commit back to your GitOps repo with this secret
+    # Write back to Git
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/git-branch: main
 
-    # We are using Kustomize with an 'images:' stanza
+    # Kustomize 'images:' writer
     argocd-image-updater.argoproj.io/write-back-target: kustomization
 
-    # Your CI will push SHA tags; pick the newest by time
-    argocd-image-updater.argoproj.io/book-store.update-strategy: latest
-    # Allow SHA-like tags (7..40 hex), adjust if you use semver
-    argocd-image-updater.argoproj.io/book-store.allow-tags: '^[a-f0-9]{7,40}$'
+    # Use the new strategy name
+    argocd-image-updater.argoproj.io/book-store.update-strategy: newest-build
 
-    # Optional: pass Docker Hub creds to avoid rate-limits
+    # Use the Docker Hub pull secret we just made
     argocd-image-updater.argoproj.io/pull-secret: pullsecret:argocd/dockerhub
 spec:
   project: default
   source:
-    repoURL: https://github.com/Haythem532002/book-store-gitops
+    repoURL: https://github.com/<you>/book-store-gitops
     targetRevision: main
     path: book-app
     kustomize: {}

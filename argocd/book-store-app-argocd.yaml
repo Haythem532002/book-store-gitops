@@ -2,21 +2,35 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: book-store-app
-  namespace:  argocd
+  namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: book-store-gitops=haythem22/book-store-gitops
+    # The container IMAGE to watch (NOT a git repo URL)
+    argocd-image-updater.argoproj.io/image-list: book-store=docker.io/haythem22/book-store-gitops
+
+    # Let the updater commit back to your GitOps repo with this secret
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/git-branch: main
+
+    # We are using Kustomize with an 'images:' stanza
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
+
+    # Your CI will push SHA tags; pick the newest by time
+    argocd-image-updater.argoproj.io/book-store.update-strategy: latest
+    # Allow SHA-like tags (7..40 hex), adjust if you use semver
+    argocd-image-updater.argoproj.io/book-store.allow-tags: '^[a-f0-9]{7,40}$'
+
+    # Optional: pass Docker Hub creds to avoid rate-limits
+    argocd-image-updater.argoproj.io/pull-secret: pullsecret:argocd/dockerhub
 spec:
   project: default
   source:
-    repoURL: git@github.com:Haythem532002/book-store-gitops.git
+    repoURL: https://github.com/Haythem532002/book-store-gitops
     targetRevision: main
     path: book-app
     kustomize: {}
-  destination: 
+  destination:
     server: https://kubernetes.default.svc
-    namespace: book-argocd
+    namespace: book-store
   syncPolicy:
     automated:
       prune: true

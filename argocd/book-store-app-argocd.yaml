@@ -22,7 +22,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<you>/book-store-gitops
+    repoURL: https://github.com/Haythem532002/book-store-gitops
     targetRevision: main
     path: book-app
     kustomize: {}
